@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600&display=swap');
+@import './variables.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: #e8eeff;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Global Heading Styles */
+h1, h2, h3, .h1, .h2, .h3 {
+  font-family: var(--font-display) !important;
+  @apply tracking-wide uppercase;
+}
+
+/* Italic Gold Effect */
+h1 em, h2 em, h3 em, .h1 em, .h2 em, .h3 em {
+  font-family: var(--font-italic) !important;
+  @apply italic text-gold-bright normal-case not-italic; /* Using not-italic to let the font-family handle it if needed, but normally italic class works */
+  font-style: italic !important;
+  text-transform: none !important;
+  color: var(--gold-bright) !important;
+}
+
+/* ── global bg mesh ── */
+body::before {
+  content:''; position:fixed; inset:0; z-index: var(--z-below); pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 55% at 8%  12%,  rgba(26,58,143,.55) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 45% at 92% 85%,  rgba(200,144,10,.18) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 60% at 55% 50%,  rgba(6,15,46,1)     0%,#060f2e 100%);
+}
+
+.orb {
+  position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; z-index: var(--z-below);
+  animation:drift 20s ease-in-out infinite alternate;
+}
+
+@layer utilities {
+  .layer-base {
+    @apply relative z-[var(--z-base)];
+  }
+  .layer-raised {
+    @apply relative z-[var(--z-raised)];
+  }
+}
+
+.orb-1 { width:550px; height:550px; background:rgba(26,58,143,.3); top:-120px; left:-120px; }
+.orb-2 { width:420px; height:420px; background:rgba(200,144,10,.13); bottom:-100px; right:-100px; animation-delay:-8s; }
+.orb-3 { width:320px; height:320px; background:rgba(212,32,32,.10); top:45%; left:58%; animation-delay:-14s; }
+
+@keyframes drift {
+  from { transform:translate(0,0) scale(1); }
+  to   { transform:translate(50px,70px) scale(1.2); }
+}
+
+@layer components {
+  /* ══════════════════════════════════════════════════════
+     ① BUTTONS
+  ══════════════════════════════════════════════════════ */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-bold cursor-pointer border-none transition-all duration-200 tracking-wider uppercase whitespace-nowrap relative overflow-hidden;
+  }
+  
+  .btn::after {
+    content:''; @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(135deg, rgba(255,255,255,.12) 0%, transparent 60%);
+  }
+
+  .btn-sm  { @apply text-[11px] px-[18px] py-[7px] rounded-full; }
+  .btn-md  { @apply text-[13px] px-[26px] py-[11px] rounded-full; }
+  .btn-lg  { @apply text-[15px] px-[34px] py-[14px] rounded-full; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue));
+    @apply text-white shadow-[0_4px_20px_rgba(26,58,143,0.5)] hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(26,58,143,0.65)];
+  }
+
+  .btn-danger {
+    background: linear-gradient(135deg, var(--red), var(--red-bright));
+    @apply text-white shadow-[0_4px_20px_rgba(212,32,32,0.45)] hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(212,32,32,0.65)];
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), #e8a820);
+    @apply text-white shadow-[0_4px_20px_rgba(200,144,10,0.45)] hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(200,144,10,0.65)];
+  }
+
+  .btn-ghost {
+    background: var(--g-bg);
+    @apply text-white border border-[var(--g-border)] backdrop-blur-[var(--blur-sm)] hover:bg-[var(--g-bg-hover)] hover:-translate-y-[1px];
+  }
+
+  /* Glass Surfaces */
+  .glass {
+    background: var(--g-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--g-border);
+    box-shadow: var(--g-shadow);
+  }
+
+  .glass-sm {
+    background: var(--g-bg);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+    border: 1px solid var(--g-border2);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     ④ PROGRAM CARDS (POSTER STYLE)
+  ══════════════════════════════════════════════════════ */
+  .prog-card {
+    @apply relative overflow-hidden transition-all duration-300;
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    background: var(--bg2);
+    border: 1px solid var(--g-border2);
+    box-shadow: var(--g-shadow);
+  }
+
+  .prog-card:hover {
+    @apply -translate-y-2 border-white/30;
+    box-shadow: var(--g-shadow-lg);
+  }
+
+  .prog-visual {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  .prog-visual-bg {
+    @apply absolute inset-0 opacity-60 transition-opacity duration-300;
+  }
+  
+  .prog-card:hover .prog-visual-bg { @apply opacity-80; }
+
+  /* Geometric Patterns */
+  .prog-geo-dots {
+    @apply absolute inset-0 opacity-10;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .prog-geo-lines {
+    @apply absolute inset-0 opacity-10;
+    background: repeating-linear-gradient(45deg, #fff, #fff 1px, transparent 1px, transparent 10px);
+  }
+
+  .prog-geo-cross {
+    @apply absolute inset-0 opacity-10;
+    background: 
+      linear-gradient(90deg, #fff 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(0deg, #fff 1px, transparent 1px) 0 0 / 20px 20px;
+  }
+
+  .prog-geo-rings {
+    @apply absolute inset-0 opacity-10;
+    background: radial-gradient(circle, transparent 40%, #fff 41%, #fff 44%, transparent 45%) 0 0 / 40px 40px;
+  }
+
+  .prog-art {
+    @apply absolute inset-0 flex items-center justify-center pointer-events-none;
+  }
+
+  .prog-icon-wrap {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-2xl flex items-center justify-center z-10 transition-transform duration-500;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .prog-card:hover .prog-icon-wrap { @apply scale-110; }
+
+  .prog-cat-pill {
+    @apply absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest z-20;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--gold-bright);
+  }
+
+  .prog-shine {
+    @apply absolute inset-0 pointer-events-none z-20 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+  }
+  .prog-card:hover .prog-shine { @apply opacity-100; }
+
+  .prog-fade {
+    @apply absolute inset-0 z-10;
+    background: linear-gradient(to bottom, transparent 40%, rgba(6, 15, 46, 0.95) 95%);
+  }
+
+  .prog-footer {
+    @apply absolute bottom-0 left-0 right-0 p-5 z-30 flex items-end justify-between gap-4;
+  }
+
+  .prog-footer-text h4 {
+    font-family: var(--font-display);
+    @apply text-base font-bold text-white mb-0.5 tracking-wide;
+  }
+
+  .prog-footer-text span {
+    @apply block text-[11px] text-white/50 font-medium;
+  }
+
+  .prog-arrow {
+    @apply w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300;
+    background: var(--g-bg);
+    border: 1px solid var(--g-border);
+    color: var(--gold-bright);
+  }
+
+  .prog-card:hover .prog-arrow {
+    @apply bg-gold-bright text-bg border-gold-bright;
+  }
+
+  /* Color themes for backgrounds */
+  .img-blue { background: linear-gradient(135deg, #0d2a7a, #2555c0); }
+  .img-gold { background: linear-gradient(135deg, #7a4a00, #c8900a); }
+  .img-red  { background: linear-gradient(135deg, #7a0a0a, #d42020); }
+  .img-green { background: linear-gradient(135deg, #0a4a1a, #1a8040); }
+  .img-purple { background: linear-gradient(135deg, #2a0a7a, #5535b0); }
+  .img-teal { background: linear-gradient(135deg, #0a4a4a, #0a8080); }
+  .img-navy { background: linear-gradient(135deg, #060f3a, #143070); }
+  .img-maroon { background: linear-gradient(135deg, #4a0a0a, #801818); }
+}

@@ -1,0 +1,41 @@
+:root {
+  /* Colors */
+  --blue:        #1a3a8f;
+  --blue-deep:   #0d1f60;
+  --blue-mid:    #2a55c0;
+  --blue-light:  #4a80f0;
+  --gold:        #c8900a;
+  --gold-bright: #f5c842;
+  --gold-pale:   rgba(245,200,66,.15);
+  --red:         #d42020;
+  --red-bright:  #ff4a4a;
+  --white:       #ffffff;
+  --bg:          #060f2e;
+  --bg2:         #0a1540;
+
+  /* Glass */
+  --g-bg:        rgba(255,255,255,0.09);
+  --g-bg-hover:  rgba(255,255,255,0.15);
+  --g-border:    rgba(255,255,255,0.20);
+  --g-border2:   rgba(255,255,255,0.12);
+  --g-shadow:    0 8px 32px rgba(0,0,0,0.35);
+  --g-shadow-lg: 0 16px 56px rgba(0,0,0,0.45);
+  --blur:        blur(20px) saturate(160%);
+  --blur-sm:     blur(10px) saturate(140%);
+
+  /* Typography Scale */
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-italic:  'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Nunito', sans-serif;
+
+  /* Sizing */
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+
+  /* z-index scale */
+  --z-below:    -1;
+  --z-base:      0;
+  --z-raised:   10;
+  --z-navbar:   1000;
+}

@@ -1,0 +1,14 @@
+.new-here-section {
+  position: relative;
+}
+
+.new-here-section .glass {
+  background: linear-gradient(135deg, var(--g-bg) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid var(--g-border2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-here-section .glass:hover {
+  border-color: var(--g-border);
+  box-shadow: var(--g-shadow-lg);
+}
