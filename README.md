@@ -1,16 +1,54 @@
-# React + Vite
+# BIWC Ghana – Digital Sanctuary
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![BIWC Homepage Screenshot](./src/assets/images/BIWC-SCreenshot.png)
 
-Currently, two official plugins are available:
+A modern, high-performance web platform for **Believers International Worship Center (BIWC) Ghana**. This project features a sophisticated **Glassmorphism Design System** tailored to create a reverent, immersive, and Spirit-filled digital experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Vision
+To transform lives through the Good News of Jesus Christ by providing a seamless digital bridge between the physical sanctuary and the global community.
 
-## React Compiler
+## 🎨 Design System: "Divine Glass"
+The UI is built on a custom-engineered design system that prioritizes hierarchy, depth, and elegance:
+- **Glassmorphism:** Semi-transparent surfaces with backdrop-blur for a premium, modern feel.
+- **Dynamic Backgrounds:** Ambient floating orbs and mesh gradients that create a living atmosphere.
+- **Typography:** 
+  - **Cinzel:** For authoritative, classical headings.
+  - **Cormorant Garamond:** For elegant, gold-italic accents.
+  - **Nunito:** For approachable and highly legible body content.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+- **Frontend:** [React 19](https://react.dev/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS v3](https://tailwindcss.com/) & PostCSS
+- **Navigation:** [React Router 7](https://reactrouter.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Interactive UI:** [Swiper.js](https://swiperjs.com/) (Carousels)
 
-## Expanding the ESLint configuration
+## 📂 Architecture
+The project follows a professional, scalable directory structure:
+- `src/components/ui`: Atomic, reusable UI elements (Buttons, Cards, etc.)
+- `src/components/layout`: Structural components (Navbar, Footer, MainLayout)
+- `src/components/sections`: Large, complex homepage sections.
+- `src/pages`: Individual page views.
+- `src/styles`: Centralized design tokens and global CSS layers.
+- `src/utils`: Reusable helpers and single-source-of-truth constants.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/your-username/biwc.git
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+## 📜 License
+This project is for church ministry purposes. All rights reserved.

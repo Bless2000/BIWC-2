@@ -13,6 +13,7 @@ import HeroBanner from '../components/sections/HeroBanner';
 import ImageCarousel from '../components/sections/ImageCarousel';
 import EventsPreview from '../components/sections/EventsPreview';
 import NewHere from '../components/sections/NewHere';
+import PrayerForm from '../components/sections/PrayerForm';
 
 // Defined these art components here for the Home page
 const RingsArt = () => (
@@ -58,18 +59,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Image Carousel */}
-      <ImageCarousel />      
-
       {/* Upcoming Events */}
       <EventsPreview />
 
       {/* New Here Section */}
       <NewHere />
 
+      {/* Image Carousel */}
+      <ImageCarousel />
 
       {/* Ministries */}
-      <section className="max-w-[1200px] mx-auto mb-20 mt-20">
+      <section className="max-w-[1200px] mx-auto mb-32 mt-20">
         <div className="flex items-baseline gap-3 mb-8 border-b border-white/10 pb-4">
           <h2 className="text-2xl font-bold text-white uppercase tracking-wide">Our <em>Ministries</em></h2>
           <span className="font-italic italic text-white/30 text-lg font-medium">Explore our community</span>
@@ -106,6 +106,9 @@ export default function Home() {
           />
         </div>
       </section>
+
+      {/* Prayer Request Section */}
+      <PrayerForm />
     </div>
   );
 }

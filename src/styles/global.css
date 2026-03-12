@@ -115,6 +115,57 @@ body::before {
   }
 
   /* ══════════════════════════════════════════════════════
+     ⑤ FORMS
+  ══════════════════════════════════════════════════════ */
+  .glass-form {
+    background: var(--g-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--g-border);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: var(--g-shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-form::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .form-group {
+    @apply mb-4 relative;
+  }
+
+  .form-group label {
+    @apply block text-[10.5px] font-bold text-white/50 mb-1.5 uppercase tracking-wider;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-[13px] text-white outline-none transition-all duration-200;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: rgba(245, 200, 66, 0.5);
+    @apply bg-white/10;
+  }
+
+  .form-group textarea {
+    @apply min-h-[120px] resize-none;
+  }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--red), var(--red-bright));
+    @apply text-white px-8 py-3 rounded-full font-bold text-[13px] uppercase tracking-widest shadow-[0_4px_20px_rgba(212,32,32,0.4)] transition-all duration-200 flex items-center gap-2 hover:-translate-y-[2px] hover:shadow-[0_8px_30px_rgba(212,32,32,0.55)];
+  }
+
+  /* ══════════════════════════════════════════════════════
      ④ PROGRAM CARDS (POSTER STYLE)
   ══════════════════════════════════════════════════════ */
   .prog-card {
