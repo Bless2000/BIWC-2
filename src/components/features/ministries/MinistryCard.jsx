@@ -5,26 +5,32 @@ const ProgramCard = ({
   category = 'Auxiliary', 
   title, 
   tagline, 
-  variant = 'blue', 
-  icon: Icon,
   geoPattern = 'dots', // 'dots', 'lines', 'cross', 'rings'
-  art: ArtSVG // Optional custom SVG art component
+  art: ArtSVG, // Optional custom SVG art component
+  image // Image to display in the art layer
 }) => {
-  const bgClass = `img-${variant}`;
   const patternClass = `prog-geo-${geoPattern}`;
 
   return (
     <div className="prog-card group cursor-pointer">
       <div className="prog-visual">
-        {/* Background Layer */}
-        <div className={`prog-visual-bg ${bgClass}`} />
+        {/* Background Layer - Simplified to dark base */}
+        <div className="absolute inset-0 bg-navy-deep/80" />
         
         {/* Pattern Layer */}
         <div className={patternClass} />
         
         {/* Art Layer */}
         <div className="prog-art">
-          {ArtSVG ? <ArtSVG /> : (
+          {image ? (
+            <img 
+              src={image} 
+              alt={title} 
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" 
+            />
+          ) : ArtSVG ? (
+            <ArtSVG />
+          ) : (
             <svg width="160" height="160" viewBox="0 0 160 160" fill="none" className="opacity-[0.18]">
               <circle cx="80" cy="80" r="70" stroke="white" strokeWidth="1"/>
               <circle cx="80" cy="80" r="50" stroke="white" strokeWidth="1"/>
@@ -32,11 +38,6 @@ const ProgramCard = ({
               <line x1="80" y1="10" x2="80" y2="150" stroke="white" strokeWidth="1"/>
             </svg>
           )}
-        </div>
-
-        {/* Icon Layer */}
-        <div className="prog-icon-wrap">
-          {Icon && <Icon className="text-white" size={32} strokeWidth={1.5} />}
         </div>
 
         {/* Effects Layer */}

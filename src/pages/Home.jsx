@@ -3,8 +3,6 @@ import {
   Users, 
   Heart, 
   Zap, 
-  Play,
-  Music2,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import ServiceCard from '../components/ui/ServiceCard';
@@ -14,6 +12,11 @@ import ImageCarousel from '../components/sections/ImageCarousel';
 import EventsPreview from '../components/sections/EventsPreview';
 import NewHere from '../components/sections/NewHere';
 import PrayerForm from '../components/sections/PrayerForm';
+
+// Import ministry images
+import mensImg from '../assets/images/men2.jpg';
+import youthImg from '../assets/images/youth3.jpg';
+import womenImg from '../assets/images/women.jpg';
 
 // Defined these art components here for the Home page
 const RingsArt = () => (
@@ -78,31 +81,25 @@ export default function Home() {
           <MinistryCard 
             title="Men's Fellowship" 
             tagline="Faith · Purpose · Leadership"
-            variant="blue"
             geoPattern="cross"
-            icon={Users}
+            image={mensImg}
           />
           <MinistryCard 
             title="Women's Ministry" 
             tagline="Grace · Strength · Community"
-            variant="gold"
             geoPattern="rings"
-            art={RingsArt}
-            icon={Heart}
+            image={womenImg}
           />
           <MinistryCard 
             title="Youth Fellowship" 
             tagline="Bold · Fearless · Called"
-            variant="red"
             geoPattern="lines"
-            icon={Zap}
+            image={youthImg}
           />
           <MinistryCard 
             title="Worship Ministry" 
             tagline="Praise · Presence · Power"
-            variant="purple"
             geoPattern="rings"
-            icon={Music2}
           />
         </div>
       </section>
