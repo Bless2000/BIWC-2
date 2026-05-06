@@ -1,20 +1,20 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { NAV_LINKS, CHURCH_INFO } from '../../utils/constants';
-import { Cross, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Button from '../ui/Button';
+import logo from '../../assets/logos/Dark-Logo.jpg';
 
 const Navbar = () => {
   return (
     <nav className="fixed top-14 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1200px] h-16 glass rounded-2xl z-[1000] flex items-center justify-between px-6 gap-4 shadow-2xl">
       {/* Brand Logo */}
       <Link to="/" className="flex items-center gap-3 group">
-        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-mid to-blue-deep border border-white/20 flex items-center justify-center shadow-[0_2px_10px_rgba(26,58,143,0.5)] transition-transform duration-300 group-hover:scale-110">
-          <Cross className="text-white" size={18} strokeWidth={2.5} />
-        </div>
-        <span className="font-title text-base text-white tracking-widest uppercase font-black">
-          {CHURCH_INFO.shortName}
-        </span>
+        <img 
+          src={logo} 
+          alt={CHURCH_INFO.name} 
+          className="h-10 w-auto object-contain rounded-md" 
+        />
       </Link>
 
       {/* Navigation Links (Desktop) */}
@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="flex items-center gap-3">
         <div className="hidden sm:flex items-center gap-2">
           <Button variant="ghost" size="sm" className="!px-4">I'm New</Button>
-          <Button variant="danger" size="sm" className="!px-4">Donate</Button>
+          <Button variant="danger" size="sm" className="!px-4">Give</Button>
         </div>
         
         {/* Mobile Menu Toggle (Simplified for now) */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CHURCH_INFO, NAV_LINKS, SOCIAL_LINKS, SERVICE_TIMES } from '../../utils/constants';
 import { Youtube, Facebook, Instagram, Music2, Mail, Phone, MapPin } from 'lucide-react';
+import logo from '../../assets/logos/Dark-Logo.jpg';
 
 const Footer = () => {
   return (
@@ -11,7 +12,11 @@ const Footer = () => {
         {/* Brand & Mission */}
         <div className="space-y-6">
           <Link to="/" className="inline-block">
-             <h2 className="font-title text-2xl font-black text-white tracking-widest uppercase">{CHURCH_INFO.shortName}</h2>
+             <img 
+               src={logo} 
+               alt={CHURCH_INFO.name} 
+               className="h-12 w-auto object-contain rounded-md" 
+             />
           </Link>
           <p className="text-white/50 text-sm leading-relaxed max-w-xs">
             A Spirit-filled community dedicated to transforming lives through the Good News of Jesus Christ.
