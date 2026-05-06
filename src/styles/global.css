@@ -282,4 +282,8 @@ body::before {
   .img-teal { background: linear-gradient(135deg, #0a4a4a, #0a8080); }
   .img-navy { background: linear-gradient(135deg, #060f3a, #143070); }
   .img-maroon { background: linear-gradient(135deg, #4a0a0a, #801818); }
+
+  .font-italic {
+    font-family: var(--font-italic) !important;
+  }
 }
