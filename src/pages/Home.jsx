@@ -10,6 +10,7 @@ import MinistryCard from '../components/features/ministries/MinistryCard';
 import HeroBanner from '../components/sections/HeroBanner';
 import ImageCarousel from '../components/sections/ImageCarousel';
 import EventsPreview from '../components/sections/EventsPreview';
+import PastorMessage from '../components/sections/PastorMessage';
 import NewHere from '../components/sections/NewHere';
 import PrayerForm from '../components/sections/PrayerForm';
 
@@ -62,6 +63,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pastor Message Section */}
+      <PastorMessage />
+
       {/* Upcoming Events */}
       <EventsPreview />
 
@@ -83,23 +87,27 @@ export default function Home() {
             tagline="Faith · Purpose · Leadership"
             geoPattern="cross"
             image={mensImg}
+            to="/ministries/mens-fellowship"
           />
           <MinistryCard 
             title="Women's Ministry" 
             tagline="Grace · Strength · Community"
             geoPattern="rings"
             image={womenImg}
+            to="/ministries/womens-ministry"
           />
           <MinistryCard 
             title="Youth Fellowship" 
             tagline="Bold · Fearless · Called"
             geoPattern="lines"
             image={youthImg}
+            to="/ministries/youth-fellowship"
           />
           <MinistryCard 
             title="Worship Ministry" 
             tagline="Praise · Presence · Power"
             geoPattern="rings"
+            to="/ministries/music-ministry"
           />
         </div>
       </section>
