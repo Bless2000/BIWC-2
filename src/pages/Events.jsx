@@ -46,10 +46,8 @@ const CatPill = ({ cat, active, onClick }) => {
 
 // ─── Event detail modal ───────────────────────────────────────────────────────
 const EventModal = ({ event, onClose }) => {
-  if (!event) return null;
-  const s = CAT[event.category] || CAT.All;
-
   React.useEffect(() => {
+    if (!event) return;
     const fn = (e) => { if (e.key === 'Escape') onClose(); };
     // Prevent body scroll while modal open
     document.body.style.overflow = 'hidden';
@@ -58,7 +56,10 @@ const EventModal = ({ event, onClose }) => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', fn);
     };
-  }, [onClose]);
+  }, [event, onClose]);
+
+  if (!event) return null;
+  const s = CAT[event.category] || CAT.All;
 
   return (
     <div
