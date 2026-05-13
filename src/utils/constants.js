@@ -39,5 +39,4 @@ export const NAV_LINKS = [
   { name: "Sermons", path: "/sermons" },
   { name: "Events", path: "/events" },
   { name: "Contact", path: "/contact" },
-  { name: "Give", path: "/give" }
 ]

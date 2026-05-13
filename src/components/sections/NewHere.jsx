@@ -73,10 +73,8 @@ function NewHere() {
               Mobile:  stacked full-width
               sm+:     side by side */}
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <a
-              href="https://forms.gle/your-form-id"
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/new-here"
               className="inline-flex items-center justify-center gap-2 px-7 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-widest text-[12.5px] sm:text-[13px] text-white transition-all duration-200 hover:-translate-y-[2px]"
               style={{
                 background: 'linear-gradient(135deg, var(--gold), #e8a820)',
@@ -85,7 +83,7 @@ function NewHere() {
             >
               <UserPlus size={16} />
               Register as a New Member
-            </a>
+            </Link>
 
             <Link
               to="/about"

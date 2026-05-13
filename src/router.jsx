@@ -3,6 +3,7 @@ import MainLayout from "./components/layout/MainLayout"
 
 import Home from "./pages/Home"
 import About from "./pages/About"
+import NewHere from "./pages/NewHere"
 import Ministries from "./pages/Ministries"
 import MinistrySingle from "./pages/MinistrySingle"
 import Gallery from "./pages/Gallery"
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
+      { path: "/new-here", element: <NewHere /> },
       { path: "/ministries", element: <Ministries /> },
       { path: "/ministries/:id", element: <MinistrySingle /> },
       { path: "/gallery", element: <Gallery /> },

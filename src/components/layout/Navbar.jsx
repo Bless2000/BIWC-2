@@ -67,8 +67,12 @@ const Navbar = () => {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Desktop CTA buttons */}
           <div className="hidden sm:flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="!px-4">I'm New</Button>
-            <Button variant="danger" size="sm" className="!px-4">Give</Button>
+            <Link to="/new-here">
+              <Button variant="ghost" size="sm" className="!px-4">I'm New</Button>
+            </Link>
+            <Link to="/give">
+              <Button variant="danger" size="sm" className="!px-4">Give</Button>
+            </Link>
           </div>
 
           {/* Hamburger toggle — visible below lg */}
@@ -162,7 +166,7 @@ const Navbar = () => {
 
         {/* Drawer footer CTAs */}
         <div className="px-4 pb-8 pt-4 border-t border-white/10 space-y-3 shrink-0">
-          <Link to="/contact" onClick={() => setMenuOpen(false)} className="block">
+          <Link to="/new-here" onClick={() => setMenuOpen(false)} className="block">
             <button
               className="w-full py-3 rounded-full text-[12.5px] font-bold uppercase tracking-wider text-white/60 transition-all duration-200 hover:text-white hover:bg-white/8"
               style={{ border: '1px solid rgba(255,255,255,0.15)' }}
