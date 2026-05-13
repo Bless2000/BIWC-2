@@ -5,6 +5,12 @@ import {
   Volume2, Youtube, ExternalLink, Radio,
 } from 'lucide-react';
 
+// Import local sermon thumbnails
+import sermon1 from '../assets/images/sermon1.jpg';
+import sermon2 from '../assets/images/sermon2.jpg';
+import sermon3 from '../assets/images/Sermon3.jpg';
+import sermon5 from '../assets/images/sermon5.jpg';
+
 /**
  * BIWC – Sermons Page
  *
@@ -57,7 +63,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ', // ← replace with real YouTube video ID
     description: 'A powerful message on what it means to truly walk in the Spirit — moment by moment, step by step.',
     scripture: 'Galatians 5:16–25',
-    thumbnail: null,
+    thumbnail: sermon1,
   },
   {
     id: 2,
@@ -71,7 +77,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'Discover how prayer moves heaven and transforms our hearts, families, and communities.',
     scripture: 'James 5:16–18',
-    thumbnail: null,
+    thumbnail: sermon2,
   },
   {
     id: 3,
@@ -85,7 +91,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'Opening message of the BIWC Word Conference 2025 — "The kingdoms of this world have become the Kingdom of our Lord."',
     scripture: 'Revelation 11:15',
-    thumbnail: null,
+    thumbnail: sermon3,
   },
   {
     id: 4,
@@ -99,7 +105,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'Day 2 of the BIWC Word Conference 2025 — a fresh encounter with the living Word.',
     scripture: 'Hebrews 4:12',
-    thumbnail: null,
+    thumbnail: sermon5,
   },
   {
     id: 5,
@@ -113,7 +119,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'What does genuine, mountain-moving faith look like? This message unpacks the anatomy of biblical faith.',
     scripture: 'Matthew 17:20',
-    thumbnail: null,
+    thumbnail: sermon1,
   },
   {
     id: 6,
@@ -127,7 +133,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'An intimate teaching on what it means to abide in Christ and bear lasting fruit.',
     scripture: 'John 15:1–11',
-    thumbnail: null,
+    thumbnail: sermon2,
   },
   {
     id: 7,
@@ -141,7 +147,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'Grace is not just a doctrine — it is a person. This message reveals the depths of God\'s grace for every believer.',
     scripture: 'Romans 5:20–21',
-    thumbnail: null,
+    thumbnail: sermon3,
   },
   {
     id: 8,
@@ -155,7 +161,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'A powerful night of intercession and breakthrough prayer. Join the prayer community of BIWC.',
     scripture: 'Isaiah 58:6',
-    thumbnail: null,
+    thumbnail: sermon3,
   },
   {
     id: 9,
@@ -169,7 +175,7 @@ const SERMONS_DATA = [
     youtubeId: 'dQw4w9WgXcQ',
     description: 'Easter Sunday message — the risen Christ is the anchor of our faith and the hope of our salvation.',
     scripture: 'John 11:25–26',
-    thumbnail: null,
+    thumbnail: sermon5,
   },
 ];
 
@@ -186,7 +192,7 @@ const catStyle = (cat) => CAT[cat] || CAT['Sunday Service'];
 
 // ─── YouTube thumbnail helper ─────────────────────────────────────────────────
 const ytThumb = (id) =>
-  id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null;
+  id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
 
 // ─── Geo dots ─────────────────────────────────────────────────────────────────
 const GeoDots = ({ opacity = '0.06' }) => (
