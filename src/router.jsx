@@ -5,7 +5,8 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Ministries from "./pages/Ministries"
 import MinistrySingle from "./pages/MinistrySingle"
-import Media from "./pages/Media"
+import Gallery from "./pages/Gallery"
+import Sermons from "./pages/Sermons"
 import Events from "./pages/Events"
 import Contact from "./pages/Contact"
 import Give from "./pages/Give"
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/ministries", element: <Ministries /> },
       { path: "/ministries/:id", element: <MinistrySingle /> },
-      { path: "/media", element: <Media /> },
+      { path: "/gallery", element: <Gallery /> },
+      { path: "/sermons", element: <Sermons /> },
       { path: "/events", element: <Events /> },
       { path: "/contact", element: <Contact /> },
       { path: "/give", element: <Give /> },
