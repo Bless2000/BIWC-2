@@ -6,7 +6,7 @@ import heroImg from '../../assets/images/hero-img.png';
 
 const HeroBanner = () => {
   return (
-    <section className="relative w-full min-h-[88vh] sm:min-h-[92vh] flex items-center overflow-hidden rounded-2xl sm:rounded-[2rem] mx-auto max-w-[1400px] mt-2 sm:mt-4 mb-14 sm:mb-20 shadow-2xl">
+    <section className="relative w-full min-h-[88vh] sm:min-h-[92vh] flex items-end overflow-hidden rounded-2xl sm:rounded-[2rem] mx-auto max-w-[1400px] mt-2 sm:mt-4 mb-14 sm:mb-20 shadow-2xl pb-12 sm:pb-20">
 
       {/* ── Background image + overlays ── */}
       <div className="absolute inset-0 z-0">
@@ -16,8 +16,8 @@ const HeroBanner = () => {
           className="w-full h-full object-cover object-center scale-105"
         />
         {/* Left-to-right dark fade */}
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(105deg, rgba(6,15,46,0.93) 0%, rgba(6,15,46,0.6) 55%, rgba(6,15,46,0.15) 100%)' }} />
+        {/* <div className="absolute inset-0"
+          style={{ background: 'linear-gradient(105deg, rgba(6,15,46,0.93) 0%, rgba(6,15,46,0.6) 55%, rgba(6,15,46,0.15) 100%)' }} /> */}
         {/* Bottom fade into page bg */}
         <div className="absolute inset-0"
           style={{ background: 'linear-gradient(to top, rgba(6,15,46,1) 0%, transparent 50%)' }} />
@@ -33,9 +33,9 @@ const HeroBanner = () => {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 sm:px-8 md:px-16 py-20 sm:py-0">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 sm:px-8 md:px-16  sm:py-0">
 
-        {/* Eyebrow pill */}
+        {/* Eyebrow pill
         <div className="flex items-center gap-2 mb-5 sm:mb-6">
           <span
             className="inline-block text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.28em] px-3 py-1 rounded-full"
@@ -43,24 +43,24 @@ const HeroBanner = () => {
           >
             Welcome to BIWC Abelemkpe
           </span>
-        </div>
+        </div> */}
 
-        {/* Main heading */}
+        {/* Main heading
         <h1 className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-bold text-white leading-[1.08] tracking-wide mb-5 sm:mb-6 max-w-[640px]">
           A Church That <em>Transforms</em> Lives
-        </h1>
+        </h1> */}
 
-        {/* Gold accent line */}
+        {/* Gold accent line
         <div
           className="w-16 h-[3px] rounded-full mb-6 sm:mb-8"
           style={{ background: 'linear-gradient(90deg, var(--gold-bright), transparent)' }}
-        />
+        /> */}
 
-        {/* Description */}
+        {/* Description
         <p className="text-white/65 max-w-lg sm:max-w-xl text-[14.5px] sm:text-[16px] md:text-[17px] leading-[1.8] mb-8 sm:mb-10">
           A Spirit-filled community dedicated to transforming lives through the power of the
           Gospel and meaningful fellowship. Join us as we grow together in faith.
-        </p>
+        </p> */}
 
         {/* CTAs */}
         <div className="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
