@@ -370,19 +370,12 @@ const AlbumCard = ({ album, onOpen }) => {
   );
 };
 
-// ─── Bento tile — shared by photos and videos ─────────────────────────────────
-const BentoTile = ({ item, albumBgColor, photoIndex, onOpenPhoto, onPlayVideo, allItems, size }) => {
-  // size: 'hero' | 'wide' | 'tall' | 'square' | 'sm'
-  const sizeClasses = {
-    hero:   'col-span-2 row-span-2',
-    wide:   'col-span-2 row-span-1',
-    tall:   'col-span-1 row-span-2',
-    square: 'col-span-1 row-span-1',
-    sm:     'col-span-1 row-span-1',
-  };
-
+// ─── Single pure media tile — image/video fills 100%, zero text ──────────────
+const Tile = ({ item, albumBgColor, photoIndex, onOpenPhoto, onPlayVideo, allItems, large = false }) => {
   const isVideo = item.type === 'video';
-  const thumb   = item.thumb || (item.youtubeId ? `https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg` : null);
+  const thumb   = item.thumb || (item.youtubeId
+    ? `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`
+    : null);
 
   const handleClick = () => {
     if (isVideo) onPlayVideo(item.youtubeId, item.caption);
@@ -392,115 +385,238 @@ const BentoTile = ({ item, albumBgColor, photoIndex, onOpenPhoto, onPlayVideo, a
   return (
     <button
       onClick={handleClick}
-      className={`relative overflow-hidden group transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.55)] ${sizeClasses[size] || sizeClasses.square}`}
-      style={{ borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', minHeight: size === 'hero' ? '280px' : '140px' }}
+      className="relative w-full h-full overflow-hidden group"
+      style={{
+        borderRadius: '14px',
+        border: '1px solid rgba(255,255,255,0.08)',
+        display: 'block',
+      }}
     >
-      {/* Background — image or gradient */}
-      {(item.src || thumb)
-        ? <img
-            src={item.src || thumb}
-            alt={item.caption || ''}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-            loading="lazy"
+      {/* ── Full-bleed media ── */}
+      {(item.src || thumb) ? (
+        <img
+          src={item.src || thumb}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+          loading="lazy"
+        />
+      ) : (
+        /* Placeholder when no image yet — gradient only, no text */
+        <div
+          className="absolute inset-0"
+          style={{ background: albumBgColor }}
+        >
+          {/* Subtle dot pattern — decorative only */}
+          <div
+            className="absolute inset-0 opacity-[0.09]"
+            style={{
+              backgroundImage: 'radial-gradient(circle,#fff 1px,transparent 1px)',
+              backgroundSize: '16px 16px',
+            }}
           />
-        : <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-80"
-            style={{ background: albumBgColor, opacity: 0.65 }}>
-            <div className="absolute inset-0 opacity-[0.07]"
-              style={{ backgroundImage: 'radial-gradient(circle,#fff 1px,transparent 1px)', backgroundSize: '18px 18px' }} />
-          </div>
-      }
+        </div>
+      )}
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 transition-opacity duration-300"
-        style={{ background: 'linear-gradient(to top, rgba(6,15,46,0.85) 0%, rgba(6,15,46,0.05) 55%)', opacity: 0.8 }} />
+      {/* ── Very subtle bottom vignette — keeps play icon readable ── */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%)' }}
+      />
 
-      {/* Hover shimmer */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 60%)' }} />
+      {/* ── Hover shimmer ── */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.09) 0%, transparent 55%)' }}
+      />
 
-      {/* Video play button */}
+      {/* ── Video: centred play button ── */}
       {isVideo && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className={`rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
-              size === 'hero' ? 'w-16 h-16' : 'w-11 h-11'
-            }`}
+            className={`rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${large ? 'w-20 h-20' : 'w-12 h-12'}`}
             style={{
-              background: 'rgba(212,32,32,0.9)',
-              boxShadow: '0 4px 24px rgba(212,32,32,0.55)',
+              background: 'rgba(212,32,32,0.88)',
+              backdropFilter: 'blur(4px)',
+              boxShadow: `0 0 ${large ? 48 : 28}px rgba(212,32,32,0.65)`,
             }}
           >
-            <Play size={size === 'hero' ? 24 : 16} fill="white" className="text-white ml-0.5" />
+            <Play size={large ? 28 : 17} fill="white" className="ml-1 text-white" />
           </div>
         </div>
       )}
 
-      {/* Photo zoom icon — appears on hover */}
+      {/* ── Photo: zoom icon appears on hover, centre ── */}
       {!isVideo && (
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(6px)', border: '1px solid rgba(255,255,255,0.2)' }}>
-            <ZoomIn size={15} className="text-white" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-250">
+          <div
+            className={`rounded-full flex items-center justify-center ${large ? 'w-14 h-14' : 'w-10 h-10'}`}
+            style={{
+              background: 'rgba(0,0,0,0.45)',
+              backdropFilter: 'blur(8px)',
+              border: '1.5px solid rgba(255,255,255,0.3)',
+            }}
+          >
+            <ZoomIn size={large ? 22 : 16} className="text-white" />
           </div>
         </div>
       )}
 
-      {/* Type badge — top left */}
-      <div className="absolute top-3 left-3">
-        {isVideo
-          ? <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider"
-              style={{ background: 'rgba(212,32,32,0.25)', border: '1px solid rgba(212,32,32,0.5)', color: '#ff6060', backdropFilter: 'blur(6px)' }}>
-              <Video size={8} /> Video
-            </div>
-          : null
-        }
-      </div>
-
-      {/* Caption — bottom */}
-      {item.caption && (
-        <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-          <p className="text-white/80 text-[10.5px] sm:text-[11px] font-medium leading-snug truncate">
-            {item.caption}
-          </p>
-        </div>
+      {/* ── Video: tiny red dot badge top-right only ── */}
+      {isVideo && (
+        <div
+          className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full"
+          style={{ background: '#ff3030', boxShadow: '0 0 6px rgba(255,48,48,0.9)' }}
+        />
       )}
     </button>
   );
 };
 
-// ─── Bento grid layout engine ─────────────────────────────────────────────────
-// Assigns a size pattern to each item so the grid feels editorial and dynamic.
-// Pattern repeats every 6 items: hero, square, square, wide, tall, square
-const BENTO_SIZES = ['hero', 'square', 'square', 'wide', 'tall', 'square'];
+// ─── Bento layout engine ──────────────────────────────────────────────────────
+// Renders items in hand-crafted row patterns.
+// Each row pattern describes how many items it consumes and what CSS it uses.
+// All tiles are pure image/video — no text, no labels inside the grid itself.
 
 const BentoGrid = ({ items, albumBgColor, onOpenPhoto, onPlayVideo, allItems }) => {
-  let photoCounter = -1; // track photo index separately for lightbox
+  // Assign photoIndex only to photos (for lightbox navigation)
+  const photoIndices = {};
+  let pc = 0;
+  items.forEach((item, i) => {
+    if (item.type === 'photo') { photoIndices[i] = pc++; }
+  });
+
+  // ── Row renderers ──────────────────────────────────────────────────────────
+
+  // Pattern A: 1 tall hero (left) + 2 stacked squares (right)  — consumes 3
+  const RowA = ({ slice, startIdx }) => (
+    <div className="grid gap-2 sm:gap-3" style={{ gridTemplateColumns: '2fr 1fr', gridTemplateRows: '200px 200px' }}>
+      {/* Hero left — spans both rows */}
+      <div style={{ gridRow: '1 / 3' }}>
+        <Tile item={slice[0]} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} large />
+      </div>
+      {slice[1] && (
+        <Tile item={slice[1]} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + 1]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      )}
+      {slice[2] && (
+        <Tile item={slice[2]} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + 2]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      )}
+    </div>
+  );
+
+  // Pattern B: 3 equal squares side by side — consumes 3
+  const RowB = ({ slice, startIdx }) => (
+    <div className="grid gap-2 sm:gap-3" style={{ gridTemplateColumns: '1fr 1fr 1fr', height: '220px' }}>
+      {slice.map((item, i) => item && (
+        <Tile key={item.id} item={item} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + i]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      ))}
+    </div>
+  );
+
+  // Pattern C: 1 wide panoramic — consumes 1
+  const RowC = ({ slice, startIdx }) => (
+    <div style={{ height: '280px' }}>
+      <Tile item={slice[0]} albumBgColor={albumBgColor}
+        photoIndex={photoIndices[startIdx]} onOpenPhoto={onOpenPhoto}
+        onPlayVideo={onPlayVideo} allItems={allItems} large />
+    </div>
+  );
+
+  // Pattern D: 2 equal landscape side by side — consumes 2
+  const RowD = ({ slice, startIdx }) => (
+    <div className="grid gap-2 sm:gap-3" style={{ gridTemplateColumns: '1fr 1fr', height: '240px' }}>
+      {slice.map((item, i) => item && (
+        <Tile key={item.id} item={item} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + i]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      ))}
+    </div>
+  );
+
+  // Pattern E: 1 small (left) + 1 large hero (right) — consumes 2 (mirror of A)
+  const RowE = ({ slice, startIdx }) => (
+    <div className="grid gap-2 sm:gap-3" style={{ gridTemplateColumns: '1fr 2fr', gridTemplateRows: '200px 200px' }}>
+      {slice[0] && (
+        <Tile item={slice[0]} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      )}
+      {/* Hero right — spans both rows */}
+      {slice[1] && (
+        <div style={{ gridRow: '1 / 3' }}>
+          <Tile item={slice[1]} albumBgColor={albumBgColor}
+            photoIndex={photoIndices[startIdx + 1]} onOpenPhoto={onOpenPhoto}
+            onPlayVideo={onPlayVideo} allItems={allItems} large />
+        </div>
+      )}
+      {slice[2] && (
+        <Tile item={slice[2]} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + 2]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      )}
+    </div>
+  );
+
+  // Pattern F: 4-quad equal grid — consumes 4
+  const RowF = ({ slice, startIdx }) => (
+    <div className="grid gap-2 sm:gap-3" style={{ gridTemplateColumns: '1fr 1fr', gridTemplateRows: '200px 200px' }}>
+      {slice.map((item, i) => item && (
+        <Tile key={item.id} item={item} albumBgColor={albumBgColor}
+          photoIndex={photoIndices[startIdx + i]} onOpenPhoto={onOpenPhoto}
+          onPlayVideo={onPlayVideo} allItems={allItems} />
+      ))}
+    </div>
+  );
+
+  // ── Assign rows ────────────────────────────────────────────────────────────
+  // Cycle through patterns so each album feels unique
+  const ROW_PATTERNS = [
+    { pattern: 'A', consume: 3 },
+    { pattern: 'B', consume: 3 },
+    { pattern: 'C', consume: 1 },
+    { pattern: 'E', consume: 3 },
+    { pattern: 'D', consume: 2 },
+    { pattern: 'F', consume: 4 },
+    { pattern: 'B', consume: 3 },
+    { pattern: 'A', consume: 3 },
+  ];
+
+  const rows = [];
+  let cursor = 0;
+  let patternIdx = 0;
+
+  while (cursor < items.length) {
+    const remaining = items.length - cursor;
+    const { pattern, consume } = ROW_PATTERNS[patternIdx % ROW_PATTERNS.length];
+    const take = Math.min(consume, remaining);
+    const slice = items.slice(cursor, cursor + take);
+    const startIdx = cursor;
+
+    rows.push({ pattern, slice, startIdx });
+    cursor += take;
+    patternIdx++;
+  }
 
   return (
-    <div
-      className="grid gap-2 sm:gap-3"
-      style={{
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gridAutoRows: 'minmax(120px, auto)',
-      }}
-    >
-      {items.map((item, globalIdx) => {
-        const sizeKey = BENTO_SIZES[globalIdx % BENTO_SIZES.length];
-        if (item.type === 'photo') photoCounter++;
-        const pIdx = item.type === 'photo' ? photoCounter : 0;
-
-        return (
-          <BentoTile
-            key={item.id}
-            item={item}
-            albumBgColor={albumBgColor}
-            photoIndex={pIdx}
-            onOpenPhoto={onOpenPhoto}
-            onPlayVideo={onPlayVideo}
-            allItems={allItems}
-            size={sizeKey}
-          />
-        );
+    <div className="space-y-2 sm:space-y-3">
+      {rows.map((row, rowIdx) => {
+        const props = { slice: row.slice, startIdx: row.startIdx, key: rowIdx };
+        switch (row.pattern) {
+          case 'A': return <RowA {...props} />;
+          case 'B': return <RowB {...props} />;
+          case 'C': return <RowC {...props} />;
+          case 'D': return <RowD {...props} />;
+          case 'E': return <RowE {...props} />;
+          case 'F': return <RowF {...props} />;
+          default:  return <RowB {...props} />;
+        }
       })}
     </div>
   );
@@ -508,81 +624,65 @@ const BentoGrid = ({ items, albumBgColor, onOpenPhoto, onPlayVideo, allItems }) 
 
 // ─── Album detail view ────────────────────────────────────────────────────────
 const AlbumDetail = ({ album, onClose, onOpenPhoto, onPlayVideo }) => {
-  const photos    = album.items.filter(i => i.type === 'photo');
-  const videos    = album.items.filter(i => i.type === 'video');
-  const allMedia  = album.items; // mixed order for bento
-  const ts        = tagStyle(album.tag);
+  const photos   = album.items.filter(i => i.type === 'photo');
+  const videos   = album.items.filter(i => i.type === 'video');
+  const allMedia = album.items;
+  const ts       = tagStyle(album.tag);
 
   return (
     <div
       className="fixed inset-0 z-[2000] overflow-y-auto"
-      style={{ background: 'rgba(4,9,28,0.99)' }}
+      style={{ background: '#040918' }}
     >
-      {/* ── Page content — padded below navbar (pt-28 ~ navbar height + gap) ── */}
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-28 pb-16">
+      <div className="max-w-[1200px] mx-auto px-3 sm:px-6 pt-28 pb-16">
 
-        {/* ── Album header ── */}
-        <div className="mb-8 md:mb-12">
+        {/* ── Minimal header — back button + meta pills only ── */}
+        <div className="flex items-center justify-between mb-6 md:mb-10">
 
-          {/* Back button */}
+          {/* Back */}
           <button
             onClick={onClose}
-            className="inline-flex items-center gap-2 text-white/40 hover:text-white text-[11.5px] font-bold uppercase tracking-widest mb-8 transition-all duration-200 group"
+            className="inline-flex items-center gap-1.5 text-white/35 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-all duration-200 group"
           >
-            <ChevronLeft size={15}
+            <ChevronLeft size={14}
               className="group-hover:-translate-x-1 transition-transform duration-200" />
-            Back to Gallery
+            Gallery
           </button>
 
-          {/* Title row */}
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <div>
-              {/* Eyebrow */}
-              <div className="flex items-center gap-2 mb-3 flex-wrap">
-                <div
-                  className="px-3 py-1 rounded-full text-[9.5px] font-bold uppercase tracking-widest"
-                  style={{ background: ts.bg, border: `1px solid ${ts.border}`, color: ts.color }}
-                >
-                  {album.tag}
-                </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-white/30">
-                  <Calendar size={10} style={{ color: 'var(--gold-bright)' }} />
-                  <span>{album.date}</span>
-                </div>
+          {/* Meta pills — right */}
+          <div className="flex items-center gap-2">
+            <div className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest"
+              style={{ background: ts.bg, border: `1px solid ${ts.border}`, color: ts.color }}>
+              {album.tag}
+            </div>
+            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-bold text-white/30"
+              style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Calendar size={9} style={{ color: 'var(--gold-bright)' }} />
+              {album.date}
+            </div>
+            {photos.length > 0 && (
+              <div className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-bold text-white/30"
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <Camera size={9} style={{ color: 'var(--gold-bright)' }} />
+                {photos.length}
               </div>
-
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide leading-tight">
-                {album.title}
-              </h1>
-              <div className="w-12 h-[2px] mt-3"
-                style={{ background: 'linear-gradient(90deg, var(--gold-bright), transparent)' }} />
-            </div>
-
-            {/* Media count pills */}
-            <div className="flex items-center gap-2 flex-wrap">
-              {photos.length > 0 && (
-                <div
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}
-                >
-                  <Camera size={12} style={{ color: 'var(--gold-bright)' }} />
-                  {photos.length} Photo{photos.length !== 1 ? 's' : ''}
-                </div>
-              )}
-              {videos.length > 0 && (
-                <div
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold"
-                  style={{ background: 'rgba(212,32,32,0.12)', border: '1px solid rgba(212,32,32,0.3)', color: '#ff6060' }}
-                >
-                  <Video size={12} />
-                  {videos.length} Video{videos.length !== 1 ? 's' : ''}
-                </div>
-              )}
-            </div>
+            )}
+            {videos.length > 0 && (
+              <div className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-bold"
+                style={{ background: 'rgba(212,32,32,0.12)', border: '1px solid rgba(212,32,32,0.28)', color: '#ff6060' }}>
+                <Video size={9} />
+                {videos.length}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* ── Bento grid — photos + videos mixed ── */}
+        {/* ── Album title — minimal, above the grid ── */}
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-wide mb-6 md:mb-8">
+          {album.title}
+        </h1>
+
+        {/* ── Pure bento grid — all images and videos, zero text inside ── */}
         <BentoGrid
           items={allMedia}
           albumBgColor={album.bgColor}
@@ -590,13 +690,6 @@ const AlbumDetail = ({ album, onClose, onOpenPhoto, onPlayVideo }) => {
           onPlayVideo={onPlayVideo}
           allItems={allMedia}
         />
-
-        {/* ── If only 1–2 items, show simple centered layout ── */}
-        {allMedia.length <= 2 && (
-          <p className="text-center text-white/20 text-xs mt-8 tracking-widest uppercase">
-            More photos & videos coming soon
-          </p>
-        )}
       </div>
     </div>
   );
